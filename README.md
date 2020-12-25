@@ -3,10 +3,10 @@ small python project - first days using python, spaghetti code time
 
 input file semantic
 
-##### players
+\##### players
 player1 player2 ...
 ... playern-1 playern
-##### words
+\##### words
 word1 word2 ...
 ... wordn-1 wordn
-##### end
+\##### end
