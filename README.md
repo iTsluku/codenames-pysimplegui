@@ -1,12 +1,12 @@
 # codenames-pysimplegui
-small python project - first days using python, spaghetti code time
+small python project - (first days using python) spaghetti code
 
 input file semantic
 
-\##### players
-player1 player2 ...
-... playern-1 playern
-\##### words
-word1 word2 ...
-... wordn-1 wordn
+\##### players <br/><br/>
+player1 player2 ... <br/><br/>
+... playerN-1 playerN <br/><br/>
+\##### words <br/><br/>
+word1 word2 ... <br/><br/>
+... wordN-1 wordN <br/><br/>
 \##### end
