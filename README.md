@@ -4,7 +4,7 @@
 
 ![demo-pic](codenames-demo.png)
 
-**input file semantic**
+**input file syntax**
 
 \##### players <br/>
 player1 player2 ... <br/>
