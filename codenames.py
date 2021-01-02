@@ -31,8 +31,23 @@ def outputDebug():
     printMatrix()
 
 
+def applyMatrix(m):
+    for v in range(len(m)):
+        for w in range(len(m[v])):
+            matrix[v][w] = Card(m[v][w].name, m[v][w].team, m[v][w].active)
+
+
 def printMatrix():
     global matrix
+    print()
+    for v in range(len(matrix)):
+        for w in range(len(matrix[v])):
+            print(str(matrix[v][w]), end='      ')
+        print()
+    print()
+
+
+def printMatrixDebug(matrix):
     print()
     for v in range(len(matrix)):
         for w in range(len(matrix[v])):
