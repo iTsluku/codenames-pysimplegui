@@ -145,8 +145,6 @@ window['out-team1'].update(
 window['out-team2'].update(
     background_color=colorT2)
 
-print(window["out-text1"].ButtonColor)
-
 
 toggle = True
 while True:

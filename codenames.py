@@ -65,7 +65,7 @@ def parseWordsPlayers():
                 else:
                     dublicateW = (token in words)
                     if not dublicateW:
-                        words.append(token)
+                        words.append(token.upper())
 
 
 def setupTeams():
