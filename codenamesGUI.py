@@ -66,11 +66,11 @@ layout = [[sg.Button('', size=(tsh, tsv), font=(
          "Helvetica", fs), k='out-text25')],
     [sg.HorizontalSeparator()],
     [sg.Text('team tango', size=(20, 1), k='out-team1'),
-     sg.Text('team1-list', size=(35, 1), k='out-team1-list'),
+     sg.Text('', size=(35, 1), k='out-team1-list'),
      sg.Input(k='in-team1', visible=False),
      sg.Button('Clear', k='clear-1', visible=False)],
     [sg.Text('team zulu', size=(20, 1), k='out-team2'),
-     sg.Text('team2-list', size=(35, 1), k='out-team2-list'),
+     sg.Text('', size=(35, 1), k='out-team2-list'),
      sg.Input(k='in-team2', visible=False),
      sg.Button('Clear', k='clear-2', visible=False)],
     [sg.HorizontalSeparator()],
@@ -101,8 +101,8 @@ def updateView():
             # window[currentTextOutputName].update(currentCardStr)
             window[currentTextOutputName].update(matrix[n][m].name)
             cardNr += 1
-    window['out-team1-list'].update(team1)
-    window['out-team2-list'].update(team2)
+    window['out-team1-list'].update(teamStr(team1))
+    window['out-team2-list'].update(teamStr(team2))
     # outputDebug()
 
 

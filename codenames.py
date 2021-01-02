@@ -12,7 +12,17 @@ team2 = []
 matrix = []
 teamMask = []
 CONST_BOARDLENGTH = 5
-CONST_BOARDSIZE = CONST_BOARDLENGTH*CONST_BOARDLENGTH
+CONST_BOARDSIZE = CONST_BOARDLENGTH * CONST_BOARDLENGTH
+
+
+def teamStr(teamList):
+    if isinstance(teamList, list):
+        teamStr = ""
+        for l in range(len(teamList)):
+            teamStr += teamList[l]
+            if (l < len(teamList)-1):
+                teamStr += ", "
+        return teamStr
 
 
 def outputDebug():
