@@ -7,8 +7,8 @@ currentLine = []
 players = []
 words = []
 gameWords = []
-teamRed = []
-teamBlue = []
+team1 = []
+team2 = []
 matrix = []
 teamMask = []
 CONST_BOARDLENGTH = 5
@@ -16,8 +16,8 @@ CONST_BOARDSIZE = CONST_BOARDLENGTH*CONST_BOARDLENGTH
 
 
 def outputDebug():
-    print(teamRed)
-    print(teamBlue)
+    print(team1)
+    print(team2)
     printMatrix()
 
 
@@ -59,7 +59,7 @@ def parseWordsPlayers():
             for token in currentLine:
                 if (status == 1):
                     dublicateP = (token in players) or (
-                        token in teamRed) or (token in teamBlue)
+                        token in team1) or (token in team2)
                     if not dublicateP:
                         players.append(token)
                 else:
@@ -69,18 +69,18 @@ def parseWordsPlayers():
 
 
 def setupTeams():
-    global teamBlue, teamRed, players
-    assert (len(teamBlue) == 0) and (len(teamRed) == 0) and (len(players) != 0)
+    global team2, team1, players
+    assert (len(team2) == 0) and (len(team1) == 0) and (len(players) != 0)
 
-    selectTeamRed = True
+    selectTeam1 = True
     while len(players) > 0:
         random.shuffle(players)
-        if selectTeamRed:
-            teamRed.append(players.pop())
-            selectTeamRed = False
+        if selectTeam1:
+            team1.append(players.pop())
+            selectTeam1 = False
         else:
-            teamBlue.append(players.pop())
-            selectTeamRed = True
+            team2.append(players.pop())
+            selectTeam1 = True
 
 
 def setupGameWords():
@@ -96,11 +96,11 @@ def setupGameWords():
 
 
 def initNewGame():
-    global players, gameWords, teamRed, teamBlue, teamMask
-    while (len(teamBlue) > 0):
-        players.append(teamBlue.pop())
-    while (len(teamRed) > 0):
-        players.append(teamRed.pop())
+    global players, gameWords, team1, team2, teamMask
+    while (len(team2) > 0):
+        players.append(team2.pop())
+    while (len(team1) > 0):
+        players.append(team1.pop())
     gameWords.clear()
     matrix.clear()
     teamMask = [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2,
@@ -111,7 +111,7 @@ def initNewGame():
 
 
 def execute(filepath):
-    global lineCollection, currentLine, players, words, teamRed, teamBlue
+    global lineCollection, currentLine, players, words, team1, team2
 
     file = open(filepath, 'r')
     for line in file:

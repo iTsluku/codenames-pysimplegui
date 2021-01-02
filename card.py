@@ -2,7 +2,7 @@ class Card:
 
     def __init__(self, name, team, active):
         self.name = name
-        self.team = team  # "teamid :: black=0, red=1, blue=2, grey=3"
+        self.team = team  # "teamid :: black=0, team1=1, team2=2, grey=3"
         self.active = active  # "known=False, unknown=True"
 
     def __str__(self):

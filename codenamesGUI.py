@@ -3,58 +3,93 @@ from codenames import *
 
 initModel = False
 
+colorBg = "#283b5b"
+colorT0 = "#512d38"
+colorT1 = "#89ce94"
+colorT2 = "#92bcea"
+colorT3 = "#4e4b5c"
+
+tsh = 14  # textsize horizontal
+tsv = 4  # textsize vertical
+fs = 16  # fontsize
+
 # init layout
-layout = [[sg.Text('text1', size=(20, 1), k='out-text1'),
-           sg.Text('text2', size=(20, 1), k='out-text2'),
-           sg.Text('text3', size=(20, 1), k='out-text3'),
-           sg.Text('text4', size=(20, 1), k='out-text4'),
-           sg.Text('text5', size=(20, 1), k='out-text5')],
-          [sg.Text('text6', size=(20, 1), k='out-text6'),
-           sg.Text('text7', size=(20, 1), k='out-text7'),
-           sg.Text('text8', size=(20, 1), k='out-text8'),
-           sg.Text('text9', size=(20, 1), k='out-text9'),
-           sg.Text('text10', size=(20, 1), k='out-text10')],
-          [sg.Text('text11', size=(20, 1), k='out-text11'),
-           sg.Text('text12', size=(20, 1), k='out-text12'),
-           sg.Text('text13', size=(20, 1), k='out-text13'),
-           sg.Text('text14', size=(20, 1), k='out-text14'),
-           sg.Text('text15', size=(20, 1), k='out-text15')],
-          [sg.Text('text16', size=(20, 1), k='out-text16'),
-           sg.Text('text17', size=(20, 1), k='out-text17'),
-           sg.Text('text18', size=(20, 1), k='out-text18'),
-           sg.Text('text19', size=(20, 1), k='out-text19'),
-           sg.Text('text20', size=(20, 1), k='out-text20')],
-          [sg.Text('text21', size=(20, 1), k='out-text21'),
-           sg.Text('text22', size=(20, 1), k='out-text22'),
-           sg.Text('text23', size=(20, 1), k='out-text23'),
-           sg.Text('text24', size=(20, 1), k='out-text24'),
-           sg.Text('text25', size=(20, 1), k='out-text25')],
-          [sg.HorizontalSeparator()],
-          [sg.Text('team tango', size=(20, 1), k='out-team1'),
-           sg.Text('team1-list', size=(35, 1), k='out-team1-list'),
-           sg.Input(k='in-team1', visible=False),
-           sg.Button('Clear', k='clear-1', visible=False)],
-          [sg.Text('team zulu', size=(20, 1), k='out-team2'),
-           sg.Text('team2-list', size=(35, 1), k='out-team2-list'),
-           sg.Input(k='in-team2', visible=False),
-           sg.Button('Clear', k='clear-2', visible=False)],
-          [sg.HorizontalSeparator()],
-          [sg.Button('New', k='new-game'),
-           sg.VerticalSeparator(),
-           sg.Button('Edit', k='edit-teamname'),
-           sg.Button('Apply', k='apply-teamname'),
-           sg.VerticalSeparator(),
-           sg.Button('Toggle', k='toggle-view'),
-           sg.VerticalSeparator(),
-           sg.Text('Filepath'),
-           sg.Input(k='in-filepath'),
-           sg.FileBrowse(),
-           sg.Button('Apply', k='apply-file'),
-           sg.VerticalSeparator(),
-           sg.Text('Games:'),
-           sg.Text('0', k='games-counter', size=(3, 1)),
-           sg.VerticalSeparator(),
-           sg.Button('Exit', k='exit')]]
+layout = [[sg.Button('', size=(tsh, tsv), font=(
+    "Helvetica", fs), k='out-text1'),
+    sg.Button('', size=(tsh, tsv), font=(
+        "Helvetica", fs), k='out-text2'),
+    sg.Button('', size=(tsh, tsv), font=(
+        "Helvetica", fs), k='out-text3'),
+    sg.Button('', size=(tsh, tsv), font=(
+        "Helvetica", fs), k='out-text4'),
+    sg.Button('', size=(tsh, tsv), font=(
+        "Helvetica", fs), k='out-text5')],
+    [sg.Button('', size=(tsh, tsv), font=(
+        "Helvetica", fs), k='out-text6'),
+     sg.Button('', size=(tsh, tsv), font=(
+         "Helvetica", fs), k='out-text7'),
+     sg.Button('', size=(tsh, tsv), font=(
+         "Helvetica", fs), k='out-text8'),
+     sg.Button('', size=(tsh, tsv), font=(
+         "Helvetica", fs), k='out-text9'),
+     sg.Button('', size=(tsh, tsv), font=(
+         "Helvetica", fs), k='out-text10')],
+    [sg.Button('', size=(tsh, tsv), font=(
+        "Helvetica", fs), k='out-text11'),
+     sg.Button('', size=(tsh, tsv), font=(
+         "Helvetica", fs), k='out-text12'),
+     sg.Button('', size=(tsh, tsv), font=(
+         "Helvetica", fs), k='out-text13'),
+     sg.Button('', size=(tsh, tsv), font=(
+         "Helvetica", fs), k='out-text14'),
+     sg.Button('', size=(tsh, tsv), font=(
+         "Helvetica", fs), k='out-text15')],
+    [sg.Button('', size=(tsh, tsv), font=(
+        "Helvetica", fs), k='out-text16'),
+     sg.Button('', size=(tsh, tsv), font=(
+         "Helvetica", fs), k='out-text17'),
+     sg.Button('', size=(tsh, tsv), font=(
+         "Helvetica", fs), k='out-text18'),
+     sg.Button('', size=(tsh, tsv), font=(
+         "Helvetica", fs), k='out-text19'),
+     sg.Button('', size=(tsh, tsv), font=(
+         "Helvetica", fs), k='out-text20')],
+    [sg.Button('', size=(tsh, tsv), font=(
+        "Helvetica", fs), k='out-text21'),
+     sg.Button('', size=(tsh, tsv), font=(
+         "Helvetica", fs), k='out-text22'),
+     sg.Button('', size=(tsh, tsv), font=(
+         "Helvetica", fs), k='out-text23'),
+     sg.Button('', size=(tsh, tsv), font=(
+         "Helvetica", fs), k='out-text24'),
+     sg.Button('', size=(tsh, tsv), font=(
+         "Helvetica", fs), k='out-text25')],
+    [sg.HorizontalSeparator()],
+    [sg.Text('team tango', size=(20, 1), k='out-team1'),
+     sg.Text('team1-list', size=(35, 1), k='out-team1-list'),
+     sg.Input(k='in-team1', visible=False),
+     sg.Button('Clear', k='clear-1', visible=False)],
+    [sg.Text('team zulu', size=(20, 1), k='out-team2'),
+     sg.Text('team2-list', size=(35, 1), k='out-team2-list'),
+     sg.Input(k='in-team2', visible=False),
+     sg.Button('Clear', k='clear-2', visible=False)],
+    [sg.HorizontalSeparator()],
+    [sg.Button('New', k='new-game'),
+     sg.VerticalSeparator(),
+     sg.Button('Edit', k='edit-teamname'),
+     sg.Button('Apply', k='apply-teamname'),
+     sg.VerticalSeparator(),
+     sg.Button('Toggle', k='toggle-view'),
+     sg.VerticalSeparator(),
+     sg.Text('Filepath'),
+     sg.Input(k='in-filepath'),
+     sg.FileBrowse(),
+     sg.Button('Apply', k='apply-file'),
+     sg.VerticalSeparator(),
+     sg.Text('Games:'),
+     sg.Text('0', k='games-counter', size=(3, 1)),
+     sg.VerticalSeparator(),
+     sg.Button('Exit', k='exit')]]
 
 
 def updateView():
@@ -66,8 +101,8 @@ def updateView():
             # window[currentTextOutputName].update(currentCardStr)
             window[currentTextOutputName].update(matrix[n][m].name)
             cardNr += 1
-    window['out-team1-list'].update(teamRed)
-    window['out-team2-list'].update(teamBlue)
+    window['out-team1-list'].update(team1)
+    window['out-team2-list'].update(team2)
     # outputDebug()
 
 
@@ -84,20 +119,20 @@ def toggleViewMode():
 
             if toggleView:
                 window[currentTextOutputName].update(
-                    background_color="#63768d")
+                    button_color=("white", colorBg))
             else:
                 if teamId == 0:
                     window[currentTextOutputName].update(
-                        background_color="#191716")
+                        button_color=("white", colorT0))
                 elif teamId == 1:
                     window[currentTextOutputName].update(
-                        background_color="#9A031E")
+                        button_color=("white", colorT1))
                 elif teamId == 2:
                     window[currentTextOutputName].update(
-                        background_color="#101D42")
+                        button_color=("white", colorT2))
                 elif teamId == 3:
                     window[currentTextOutputName].update(
-                        background_color="#3E363F")
+                        button_color=("white", colorT3))
             cardNr += 1
     toggleView = not toggleView
 
@@ -106,9 +141,12 @@ def toggleViewMode():
 window = sg.Window('codenames', layout, finalize=True)
 
 window['out-team1'].update(
-    background_color="#9A031E")
+    background_color=colorT1)
 window['out-team2'].update(
-    background_color="#101D42")
+    background_color=colorT2)
+
+print(window["out-text1"].ButtonColor)
+
 
 toggle = True
 while True:
