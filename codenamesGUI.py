@@ -20,6 +20,7 @@ colorT0 = "#512d38"
 colorT1 = "#89ce94"
 colorT2 = "#92bcea"
 colorT3 = "#4e4b5c"
+colorGold = "#ffb700"
 
 tsh = 14  # textsize horizontal
 tsv = 4  # textsize vertical
@@ -131,15 +132,13 @@ def gameDone():
             elif (card.team == 2 and card.active):
                 team2sum += 1
     if (team1sum == 0 or team2sum == 0):
-        # todo winner msg ...
-        '''
         winnerMsg = ""
         if (team1sum == 0):
-            winnerMsg = str(values['out-team1']) + " gewinnt!"
+            window['out-team1'].update(background_color=colorGold)
+            window['out-team2'].update(background_color=colorBg)
         else:
-            winnerMsg = str(values['out-team2']) + " gewinnt!"
-        window['out-codename'].update(winnerMsg)
-        '''
+            window['out-team2'].update(background_color=colorGold)
+            window['out-team1'].update(background_color=colorBg)
         return True
     else:
         return False
@@ -338,7 +337,6 @@ while True:
             applyMatrix(boardPop.matrix)
             stateChange(boardPop.state)
             window['out-codename'].update(boardPop.codename)
-            print(boardPop.codename)
 
             if (boardPop.state == 1 or boardPop.state == 2):
                 window['out-codename'].update(text_color=colorT1)
