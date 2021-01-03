@@ -2,7 +2,7 @@
 
 (local) codenames game (toggle view) #python, pysimplegui
 
-![demo-pic](codenames-demo.png)
+![png/codenames-demo.png](codenames-demo.png)
 
 **input file syntax**
 
