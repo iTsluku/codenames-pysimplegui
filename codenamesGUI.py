@@ -13,6 +13,7 @@ state 3 : team2 enter codename
 state 4 : team2 guess names
 '''
 state = 0  # default game-state
+cc = ""  # current codename
 
 colorBg = "#283b5b"
 colorT0 = "#512d38"
@@ -160,10 +161,11 @@ def updateScore():
 
 
 def resetGameState():
-    global state, stack
+    global state, stack, cc
     stack.clear()
     stateChange(1)
     updateScore()
+    cc = ""
 
 
 def guessCard(key):
@@ -180,7 +182,7 @@ def guessCard(key):
         if card.active:
             # push current board to stack
             stack.append(Board(copy.deepcopy(matrix),
-                               state, values['in-codename']))
+                               state, cc))
             if card.team == 0:
                 window[key].update(button_color=("white", colorT0))
             elif card.team == 1:
@@ -336,16 +338,19 @@ while True:
             applyMatrix(boardPop.matrix)
             stateChange(boardPop.state)
             window['out-codename'].update(boardPop.codename)
+            print(boardPop.codename)
 
             if (boardPop.state == 1 or boardPop.state == 2):
                 window['out-codename'].update(text_color=colorT1)
             elif(boardPop.state == 3 or boardPop.state == 4):
                 window['out-codename'].update(text_color=colorT2)
             updateViewChange()
+            updateScore()
 
     if event == 'apply-codename':
         if values['in-codename'] != '':
             window['out-codename'].update(values['in-codename'])
+            cc = values['in-codename']
             if toggleView:
                 toggleViewMode()
             if state == 1:
@@ -359,7 +364,7 @@ while True:
         if (state != 0):
             # push current board to stack
             stack.append(Board(copy.deepcopy(matrix),
-                               state, values['in-codename']))
+                               state, cc))
             if (state == 1 or state == 2):
                 stateChange(3)
             else:
