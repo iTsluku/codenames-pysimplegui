@@ -111,11 +111,11 @@ layout = [[sg.Button('', size=(tsh, tsv), font=(
      sg.VerticalSeparator(),
      sg.Text('Filepath'),
      sg.Input(k='in-filepath'),
-     sg.FileBrowse(),
+     sg.FileBrowse(k='file-browser'),
      sg.Button('Apply', k='apply-file'),
      sg.VerticalSeparator(),
      sg.Text('Games:'),
-     sg.Text('0', k='games-counter', size=(3, 1)),
+     sg.Text('0', k='games-counter', text_color="red", size=(3, 1)),
      sg.VerticalSeparator(),
      sg.Button('Exit', k='exit')]]
 
@@ -309,6 +309,17 @@ def toggleViewMode():
         toggleView = not toggleView
 
 
+def updateCounter():
+    global words
+    gamesLeft = int(len(words) / CONST_BOARDSIZE)
+    window['games-counter'].update('{:3}'.format(str(gamesLeft)))
+
+    if gamesLeft <= 3:
+        window['games-counter'].update(text_color="red")
+    else:
+        window['games-counter'].update(text_color="white")
+
+
 # init gui
 window = sg.Window('codenames', layout, finalize=True)
 
@@ -325,8 +336,7 @@ while True:
         updateView()
         toggleView = True
         toggleViewMode()
-        window['games-counter'].update('{:3}'.format(
-            str(int(len(words) / CONST_BOARDSIZE))))
+        updateCounter()
         resetGameState()
         updateViewChange()
 
@@ -408,8 +418,7 @@ while True:
 
             initModel = True
             window['in-filepath'].update("")
-            window['games-counter'].update('{:3}'.format(
-                str(int(len(words) / CONST_BOARDSIZE))))
+            updateCounter()
         except FileNotFoundError as e:
             print("Error! Wrong path")
 

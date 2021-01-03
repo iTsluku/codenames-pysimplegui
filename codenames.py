@@ -95,7 +95,6 @@ def parseWordsPlayers():
 
 def setupTeams():
     global team2, team1, players
-    assert (len(team2) == 0) and (len(team1) == 0) and (len(players) != 0)
 
     selectTeam1 = True
     while len(players) > 0:
@@ -110,8 +109,7 @@ def setupTeams():
 
 def setupGameWords():
     global CONST_BOARDSIZE, gameWords, words
-    assert (len(gameWords) == 0 and len(words) >=
-            CONST_BOARDSIZE)  # add error msg gui
+
     i = 0
     while (i < CONST_BOARDSIZE):
         index = random.randint(0, len(words)-1)
