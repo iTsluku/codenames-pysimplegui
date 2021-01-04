@@ -88,7 +88,7 @@ def parseWordsPlayers():
                     if not dublicateP:
                         players.append(token)
                 else:
-                    dublicateW = (token in words)
+                    dublicateW = (token.upper() in words)
                     if not dublicateW:
                         words.append(token.upper())
 

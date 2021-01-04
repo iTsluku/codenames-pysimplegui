@@ -132,7 +132,6 @@ def gameDone():
             elif (card.team == 2 and card.active):
                 team2sum += 1
     if (team1sum == 0 or team2sum == 0):
-        winnerMsg = ""
         if (team1sum == 0):
             window['out-team1'].update(background_color=colorGold)
             window['out-team2'].update(background_color=colorBg)
@@ -193,7 +192,18 @@ def guessCard(key):
             card.active = False
             updateScore()
             if (gameDone() or card.team == 0):
-                stateChange(0)
+                if (card.team == 0):
+                    if state == 2:
+                        window['out-team2'].update(
+                            background_color=colorGold)
+                        window['out-team1'].update(
+                            background_color=colorBg)
+                    elif state == 4:
+                        window['out-team1'].update(
+                            background_color=colorGold)
+                        window['out-team2'].update(
+                            background_color=colorBg)
+                    stateChange(0)
             elif (state == 2 and card.team != 1):
                 stateChange(3)
             elif (state == 4 and card.team != 2):
@@ -329,7 +339,7 @@ def toggleViewMode():
 
 
 def updateCounter():
-    global words
+    global words, CONST_BOARDSIZE
     gamesLeft = int(len(words) / CONST_BOARDSIZE)
     window['games-counter'].update('{:3}'.format(str(gamesLeft)))
 
