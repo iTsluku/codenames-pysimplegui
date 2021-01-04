@@ -115,7 +115,7 @@ layout = [[sg.Button('', size=(tsh, tsv), font=(
      sg.Button('Apply', k='apply-file'),
      sg.VerticalSeparator(),
      sg.Text('Games:'),
-     sg.Text('0', k='games-counter', text_color="red", size=(3, 1)),
+     sg.Text('0', k='games-counter', text_color=colorGold, size=(3, 1)),
      sg.VerticalSeparator(),
      sg.Button('Exit', k='exit')]]
 
@@ -170,7 +170,7 @@ def resetGameState():
 def guessCard(key):
     global state, matrix, stack, CONST_BOARDLENGTH
 
-    if (state == 2 or state == 4):
+    if state != 0:
         index = int(key.removeprefix('out-text'))
         row = int(index / CONST_BOARDLENGTH)
         if (index % CONST_BOARDLENGTH != 0):
@@ -178,7 +178,7 @@ def guessCard(key):
         col = index - (row-1)*CONST_BOARDLENGTH
         card = matrix[row-1][col-1]
 
-        if card.active:
+        if (state == 2 or state == 4) and card.active:
             # push current board to stack
             stack.append(Board(copy.deepcopy(matrix),
                                state, cc))
@@ -198,6 +198,14 @@ def guessCard(key):
                 stateChange(3)
             elif (state == 4 and card.team != 2):
                 stateChange(1)
+
+        if (not card.active):
+            if card.toggle:
+                window[key].update("")
+                card.toggle = False
+            else:
+                window[key].update(card.name)
+                card.toggle = True
 
 
 def stateChange(s):
@@ -259,6 +267,9 @@ def updateViewChange():
             else:
                 window[currentTextOutputName].update(
                     button_color=("white", colorBg))
+            if active:
+                window[currentTextOutputName].update(matrix[n][m].name)
+                matrix[n][m].toggle = True
             cardNr += 1
 
 
@@ -273,26 +284,34 @@ def toggleViewMode():
         for n in range(len(matrix)):
             for m in range(len(matrix[n])):
                 currentTextOutputName = "out-text" + str(cardNr)
-                teamId = matrix[n][m].team
-                active = matrix[n][m].active
+                card = matrix[n][m]
+                teamId = card.team
+                active = card.active
 
                 if toggleView:
-                    if teamId == 0 and not active:
-                        window[currentTextOutputName].update(
-                            button_color=("white", colorT0))
-                    elif teamId == 1 and not active:
-                        window[currentTextOutputName].update(
-                            button_color=("white", colorT1))
-                    elif teamId == 2 and not active:
-                        window[currentTextOutputName].update(
-                            button_color=("white", colorT2))
-                    elif teamId == 3 and not active:
-                        window[currentTextOutputName].update(
-                            button_color=("white", colorT3))
+                    if not active:
+                        if card.toggle:
+                            window[currentTextOutputName].update(card.name)
+                        else:
+                            window[currentTextOutputName].update("")
+                        if teamId == 0:
+                            window[currentTextOutputName].update(
+                                button_color=("white", colorT0))
+                        elif teamId == 1:
+                            window[currentTextOutputName].update(
+                                button_color=("white", colorT1))
+                        elif teamId == 2:
+                            window[currentTextOutputName].update(
+                                button_color=("white", colorT2))
+                        elif teamId == 3:
+                            window[currentTextOutputName].update(
+                                button_color=("white", colorT3))
+
                     else:
                         window[currentTextOutputName].update(
                             button_color=("white", colorBg))
                 else:
+                    window[currentTextOutputName].update(card.name)
                     if teamId == 0:
                         window[currentTextOutputName].update(
                             button_color=("white", colorT0))
@@ -315,7 +334,7 @@ def updateCounter():
     window['games-counter'].update('{:3}'.format(str(gamesLeft)))
 
     if gamesLeft <= 3:
-        window['games-counter'].update(text_color="red")
+        window['games-counter'].update(text_color=colorGold)
     else:
         window['games-counter'].update(text_color="white")
 
